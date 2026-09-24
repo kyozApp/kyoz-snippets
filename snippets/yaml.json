@@ -1,0 +1,34 @@
+{
+	"[Docker / Podman] PostgreSQL 18 Compose": {
+		"prefix": "kyoz-compose-postgres",
+		"body": [
+			"# ===========================================================================",
+			"# Podman / Docker Compose - Base de Datos (PostgreSQL 18)",
+			"# ===========================================================================",
+			"name: ${1:app_name}",
+			"",
+			"services:",
+			"\tdb:",
+			"\t\timage: docker.io/library/postgres:18-alpine",
+			"\t\trestart: always",
+			"\t\tports:",
+			"\t\t\t- \"\\${POSTGRES_PORT:?POSTGRES_PORT es requerido}:5432\"",
+			"\t\tvolumes:",
+			"\t\t\t- pgdata_${2:dev}:/var/lib/postgresql",
+			"\t\tenvironment:",
+			"\t\t\t- POSTGRES_DB=\\${POSTGRES_DB:?POSTGRES_DB es requerido}",
+			"\t\t\t- POSTGRES_USER=\\${POSTGRES_USER:?POSTGRES_USER es requerido}",
+			"\t\t\t- POSTGRES_PASSWORD=\\${POSTGRES_PASSWORD:?POSTGRES_PASSWORD es requerido}",
+			"",
+			"# ===========================================================================",
+			"# Volúmenes Persistentes",
+			"# ===========================================================================",
+			"volumes:",
+			"\tpgdata_${2:dev}:"
+		],
+		"description": [
+			"[compose.yaml] Contenedor PostgreSQL 18 con Volumen Persistente",
+			"- Configuración lista para podman compose up -d (o docker compose up -d)"
+		]
+	}
+}

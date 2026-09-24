@@ -158,7 +158,10 @@
 			"\t}",
 			"}"
 		],
-		"description": "Configuración completa y documentada de Biome para SvelteKit con tabs, linter y orden de imports"
+		"description": [
+			"[biome.json] Configuración de Biome",
+			"- Hard tabs (ancho 2), linter para Svelte y Tailwind v4, y orden de imports"
+		]
 	},
 	"[SvelteKit] Zed Settings Configuration": {
 		"prefix": "kyoz-sv-zed",
@@ -233,6 +236,36 @@
 			"\t}",
 			"}"
 		],
-		"description": "Configuración completa y documentada de .zed/settings.json con tabs, Biome y Tailwind LSP"
+		"description": [
+			"[.zed/settings.json] Configuración de Workspace para Zed",
+			"- Hard tabs (ancho 2), Biome como formateador y Tailwind LSP para Svelte"
+		]
+	},
+	"[SvelteKit] TypeScript Configuration": {
+		"prefix": "kyoz-sv-tsconfig",
+		"body": [
+			"{",
+			"\t\"extends\": \"./.svelte-kit/tsconfig.json\",",
+			"\t\"compilerOptions\": {",
+			"\t\t\"rewriteRelativeImportExtensions\": true,",
+			"\t\t\"allowJs\": true,",
+			"\t\t\"checkJs\": true,",
+			"\t\t\"esModuleInterop\": true,",
+			"\t\t\"forceConsistentCasingInFileNames\": true,",
+			"\t\t\"resolveJsonModule\": true,",
+			"\t\t\"skipLibCheck\": true,",
+			"\t\t\"sourceMap\": true,",
+			"\t\t\"strict\": true,",
+			"\t\t\"moduleResolution\": \"bundler\",",
+			"\t\t\"module\": \"preserve\",",
+			"\t\t\"types\": [\"node\"]",
+			"\t},",
+			"\t\"exclude\": [\"node_modules\", \"prisma.config.ts\"]",
+			"}"
+		],
+		"description": [
+			"[tsconfig.json] Configuración TypeScript estricta para SvelteKit",
+			"- Modos estrictos, module preserve y resolución bundler para Svelte 5"
+		]
 	}
 }
