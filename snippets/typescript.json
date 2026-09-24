@@ -1,6 +1,6 @@
 {
-	"Remote Form Function": {
-		"prefix": "kyoz-ts-sv-remote-form",
+	"[SvelteKit] Remote Form Function": {
+		"prefix": "kyoz-sv-remote-form",
 		"body": [
 			"import { form } from \"\\$app/server\";",
 			"",
@@ -29,8 +29,8 @@
 		],
 		"description": "Función Remote Form con $app/server, base de datos y refresco de caché"
 	},
-	"Remote Command Function": {
-		"prefix": "kyoz-ts-sv-remote-command",
+	"[SvelteKit] Remote Command Function": {
+		"prefix": "kyoz-sv-remote-command",
 		"body": [
 			"import { error } from \"@sveltejs/kit\";",
 			"import { command } from \"\\$app/server\";",
@@ -65,8 +65,8 @@
 		],
 		"description": "Función Remote Command con validación de existencia, mutación y refresco de caché"
 	},
-	"Remote Query Function": {
-		"prefix": "kyoz-ts-sv-remote-query",
+	"[SvelteKit] Remote Query Function": {
+		"prefix": "kyoz-sv-remote-query",
 		"body": [
 			"import { error } from \"@sveltejs/kit\";",
 			"import { query } from \"\\$app/server\";",
@@ -115,8 +115,8 @@
 		],
 		"description": "Funciones Remote Query (listado y detalle) validadas con Valibot"
 	},
-	"Valibot Form Validation": {
-		"prefix": "kyoz-ts-sv-validation-form",
+	"[SvelteKit] Valibot Form Validation": {
+		"prefix": "kyoz-sv-validation-form",
 		"body": [
 			"import * as v from \"valibot\";",
 			"",
@@ -157,8 +157,8 @@
 		],
 		"description": "Esquemas de validación Valibot para formulario (Create y Update) con tipos InferOutput"
 	},
-	"Valibot Command Validation": {
-		"prefix": "kyoz-ts-sv-validation-command",
+	"[SvelteKit] Valibot Command Validation": {
+		"prefix": "kyoz-sv-validation-command",
 		"body": [
 			"import * as v from \"valibot\";",
 			"",
@@ -182,8 +182,8 @@
 		],
 		"description": "Esquema de validación Valibot para Remote Command con tipo InferOutput"
 	},
-	"Valibot Query Validation": {
-		"prefix": "kyoz-ts-sv-validation-query",
+	"[SvelteKit] Valibot Query Validation": {
+		"prefix": "kyoz-sv-validation-query",
 		"body": [
 			"import * as v from \"valibot\";",
 			"",
@@ -232,5 +232,79 @@
 			">;"
 		],
 		"description": "Esquemas de validación Valibot para List y Detail Query con tipos InferOutput"
+	},
+	"[Prisma 8] Base Contract": {
+		"prefix": "kyoz-prisma-contract",
+		"body": [
+			"import {",
+			"\tdefineContract,",
+			"\tnativeEnum,",
+			"\tpg,",
+			"} from \"@prisma/orm-postgres/contract-builder\";",
+			"",
+			"export const contract = defineContract({}, ({ field, model, rel }) => {",
+			"\t// ─── Enums ──────────────────────────────────────────────────────────",
+			"\tconst Role = nativeEnum(\"Role\", ${1:\"ADMIN\", \"USER\"});",
+			"",
+			"\t// ─── Modelos Core ───────────────────────────────────────────────────",
+			"\tconst User = model(\"User\", {",
+			"\t\tfields: {",
+			"\t\t\tid: field.id.uuidv7Native(),",
+			"\t\t\tname: field.text(),",
+			"\t\t\tusername: field.text().unique(),",
+			"\t\t\temail: field.text().unique(),",
+			"\t\t\tpassword: field.text(),",
+			"\t\t\trole: field.column(pg.enum(Role)).default(\"${2:USER}\"),",
+			"\t\t\tisActive: field.boolean().default(true),",
+			"\t\t\tcreatedAt: field.temporal.createdAtString(),",
+			"\t\t\tupdatedAt: field.temporal.updatedAtString(),",
+			"\t\t},",
+			"\t});",
+			"",
+			"\tconst Session = model(\"Session\", {",
+			"\t\tfields: {",
+			"\t\t\tid: field.id.uuidv7Native(),",
+			"\t\t\tuserId: field.uuidNative(),",
+			"\t\t\texpiresAt: field.temporal.timestamptzString(),",
+			"\t\t\tcreatedAt: field.temporal.createdAtString(),",
+			"\t\t\tupdatedAt: field.temporal.updatedAtString(),",
+			"\t\t},",
+			"\t});",
+			"",
+			"\t$0",
+			"",
+			"\treturn {",
+			"\t\tmodels: {",
+			"\t\t\tUser: User.relations({",
+			"\t\t\t\tsessions: rel.hasMany(Session, { by: \"userId\" }),",
+			"\t\t\t}),",
+			"\t\t\tSession: Session.relations({",
+			"\t\t\t\tuser: rel.belongsTo(User, { from: \"userId\", to: \"id\" }),",
+			"\t\t\t}),",
+			"\t\t},",
+			"\t};",
+			"});"
+		],
+		"description": "Estructura base de Prisma 8 Contract Builder con modelos User, Session y enum Role"
+	},
+	"[Prisma 8] Singleton DB Client": {
+		"prefix": "kyoz-prisma-db",
+		"body": [
+			"import { ${1:DATABASE_URL} } from \"${2:\\$app/env/private}\";",
+			"",
+			"import postgres from \"@prisma/orm-postgres/runtime\";",
+			"",
+			"import type { Contract } from \"${3:../../prisma/contract.d}\";",
+			"import contractJson from \"${4:../../prisma/contract.json}\" with { type: \"json\" };",
+			"",
+			"/**",
+			" * Cliente singleton de base de datos para PostgreSQL con Prisma 8.",
+			" */",
+			"export const db = postgres<Contract>({",
+			"\tcontractJson,",
+			"\turl: ${1:DATABASE_URL},",
+			"});"
+		],
+		"description": "Cliente singleton de base de datos PostgreSQL con Prisma 8 Runtime"
 	}
 }

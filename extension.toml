@@ -8,5 +8,6 @@ repository = "https://github.com/tu-usuario/kyoz-snippets"
 
 snippets = [
   "./snippets/typescript.json",
-  "./snippets/svelte.json"
+  "./snippets/svelte.json",
+  "./snippets/json.json"
 ]

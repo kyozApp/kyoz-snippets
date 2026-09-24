@@ -1,5 +1,5 @@
 {
-	"SvelteKit Remote Form Component": {
+	"[SvelteKit] Remote Form Component": {
 		"prefix": "kyoz-sv-comp-form",
 		"body": [
 			"<script lang=\"ts\">",
@@ -111,7 +111,7 @@
 		],
 		"description": "Componente: Formulario de actualización (Remote Form + Remote Query con boundary)"
 	},
-	"SvelteKit Remote Table Component": {
+	"[SvelteKit] Remote Table Component": {
 		"prefix": "kyoz-sv-comp-table",
 		"body": [
 			"<script lang=\"ts\">",
@@ -166,7 +166,7 @@
 		],
 		"description": "Componente: Tabla de datos con <svelte:boundary> que consume Remote Query"
 	},
-	"SvelteKit Remote Command Button": {
+	"[SvelteKit] Remote Command Button": {
 		"prefix": "kyoz-sv-comp-button",
 		"body": [
 			"<script lang=\"ts\">",
