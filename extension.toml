@@ -1,0 +1,12 @@
+id = "kyoz-snippets"
+name = "Kyoz Snippets"
+version = "0.0.1"
+schema_version = 1
+authors = ["Erick Palomino <kyoz.dev@gmail.com>"]
+description = "Snippets personales"
+repository = "https://github.com/tu-usuario/kyoz-snippets"
+
+snippets = [
+  "./snippets/typescript.json",
+  "./snippets/svelte.json"
+]
