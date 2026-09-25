@@ -3,14 +3,10 @@ name = "Kyoz Snippets"
 version = "0.0.1"
 schema_version = 1
 authors = ["Erick Palomino <kyoz.dev@gmail.com>"]
-description = "Snippets personales"
-repository = "https://github.com/tu-usuario/kyoz-snippets"
+description = "Colección de snippets de desarrollo rápido para SvelteKit (Runes, Remote Functions, Valibot)"
+repository = "https://github.com/kyozApp/kyoz-snippets"
 
 snippets = [
   "./snippets/typescript.json",
-  "./snippets/svelte.json",
-  "./snippets/json.json",
-  "./snippets/css.json",
-  "./snippets/yaml.json",
-  "./snippets/markdown.json"
+  "./snippets/svelte.json"
 ]
